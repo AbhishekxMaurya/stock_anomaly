@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Prediction Results</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Stock Prediction Results</h1>
+        </div>
+    </header>
+    <div class="container">
+        <h2>Anomaly Detection</h2>
+        <img src="data:image/png;base64,{{ anomaly_img_url }}" alt="Anomaly Detection">
+
+        <h2>Future Prediction</h2>
+        <img src="data:image/png;base64,{{ future_img_url }}" alt="Future Prediction">
+    </div>
+</body>
+</html>
