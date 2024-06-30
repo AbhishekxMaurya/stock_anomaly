@@ -1,55 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Stock Prediction</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Anomalies and Predictions</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Stock Prediction</h1>
-        </div>
-    </header>
     <div class="container">
-        <section id="showcase">
-            <h1>Enter Stock Code</h1>
-            <form id="stockForm" action="/predict" method="post">
-                <label for="stock_code">Stock Code:</label>
-                <input type="text" id="stock_code" name="stock_code" required>
-                <label for="start_date">Start Date:</label>
-                <input type="date" id="start_date" name="start_date" required>
-                <label for="end_date">End Date:</label>
-                <input type="date" id="end_date" name="end_date" required>
-                <input type="submit" value="Predict">
-            </form>
-            <div class="progress-container" style="display: none;">
-                <div class="progress-bar" id="progress-bar"></div>
-            </div>
-            <p id="eta" style="display: none;"></p>
-        </section>
+        <h1>Stock Anomalies and Predictions</h1>
+        <form method="post">
+            <label for="stock_code">Stock Code:</label>
+            <input type="text" id="stock_code" name="stock_code" required>
+            <label for="start_date">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" required>
+            <label for="end_date">End Date:</label>
+            <input type="date" id="end_date" name="end_date" required>
+            <button type="submit">Submit</button>
+        </form>
+
+        {% if plot_url_anomalies %}
+        <div class="plot-container">
+            <h2>Anomalies in Stock Prices</h2>
+            <img id="width : 80%" src="data:image/png;base64,{{ plot_url_anomalies }}" alt="Anomaly Plot">
+        </div>
+        {% endif %}
+
+        {% if plot_url_predictions %}
+        <div class="plot-container">
+            <h2>Stock Price Predictions</h2>
+            <img src="data:image/png;base64,{{ plot_url_predictions }}" alt="Prediction Plot">
+        </div>
+        {% endif %}
+
+        {% if eta %}
+        <div class="eta-container">
+            <h2>Estimated Time of Analysis</h2>
+            <p>{{ eta }} seconds</p>
+        </div>
+        {% endif %}
     </div>
-    <script>
-        document.getElementById("stockForm").onsubmit = function() {
-            document.querySelector(".progress-container").style.display = "block";
-            document.getElementById("eta").style.display = "block";
-            let progressBar = document.getElementById("progress-bar");
-            let eta = document.getElementById("eta");
-            let progress = 0;
-            let timeLeft = 100;
-            
-            function updateProgress() {
-                progress += 1;
-                timeLeft -= 1;
-                progressBar.style.width = progress + "%";
-                eta.innerHTML = "ETA: " + timeLeft + " seconds";
-                if (progress < 100) {
-                    setTimeout(updateProgress, 1000);
-                } else {
-                    eta.innerHTML = "Processing complete.";
-                }
-            }
-            updateProgress();
-        }
-    </script>
 </body>
 </html>
