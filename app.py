@@ -11,6 +11,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, LSTM
 import time
 
+
 app = Flask(__name__)
 
 def fetch_stock_data(stock_code, start_date, end_date):
