@@ -137,5 +137,3 @@ def index():
 
     return render_template('index.html', plot_url_anomalies=plot_url_anomalies, plot_url_predictions=plot_url_predictions, eta=eta)
 
-if __name__ == '__main__':
-    app.run(debug=True)
