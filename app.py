@@ -11,7 +11,6 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, LSTM
 import time
 
-
 app = Flask(__name__)
 
 def fetch_stock_data(stock_code, start_date, end_date):
@@ -138,3 +137,5 @@ def index():
 
     return render_template('index.html', plot_url_anomalies=plot_url_anomalies, plot_url_predictions=plot_url_predictions, eta=eta)
 
+if __name__ == '__main__':
+    app.run(debug=True)
