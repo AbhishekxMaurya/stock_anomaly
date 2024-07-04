@@ -55,6 +55,15 @@ button:hover {
     margin-top: 20px;
 }
 
+.plot-container img {
+    width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    background: #fff;
+}
+
 .eta-container {
     margin-top: 20px;
     font-size: 1.2em;
